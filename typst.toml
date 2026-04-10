@@ -1,0 +1,17 @@
+[package]
+name = "application-docs"
+version = "1.0.0"
+compiler = "0.14.2"
+entrypoint = "src/application_docs.typ"
+repository = "https://github.com/markusritschel/typst-template-application-docs"
+authors = ["Markus Ritschel <https://markusritschel.github.io>"]
+license = "MIT"
+description = "Professional Typst template for complete job application packages: cover letters, CVs, and certificates, data-driven from YAML"
+keywords = ["application", "cover-letter", "CV", "resume", "job", "YAML", "professional"]
+categories = ["cv"]
+disciplines = []
+
+[template]
+path = "layouts"
+entrypoint = "application-documents.typ"
+thumbnail = "thumbnail.png"

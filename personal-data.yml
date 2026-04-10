@@ -1,0 +1,137 @@
+settings:
+  lang:   en    # controls all template section headings (see src/translate.yaml)
+  accent: rgb("#775582")
+  text:   rgb("#1c1c1c")
+  meta:   rgb("#666666")
+  font:   "Libertinus Serif"
+  size:   10pt
+
+# ── Cover page ──────────────────────────────────────────────────────────────
+
+personal:
+  first-name: John
+  last-name:  Doe
+  address-street: 742 Evergreen Terrace
+  address-city:   Springfield, USA
+  phone:  "555-000"
+  email:  john.doe@example.com
+  website: https://johndoe.com
+  photo: /photo.png           # path relative to src/application_docs.typ
+  signature: /signature.png   # optional: signature graphic at end of CV; path relative to src/application_docs.typ
+  titles: [Ph.D.]             # optional — shown below the name
+  profiles:
+    - network: GitHub
+      url: https://github.com/johndoe
+    - network: ORCID
+      url: https://orcid.org/0000-0000-0000-0000
+    - network: Twitter
+      url: https://x.com/johndoe
+    - network: Bluesky
+      url: https://bsky.app/jdoe
+    - network: LinkedIn
+      url: https://linkedin.com/in/johndoe
+
+
+# ── Curriculum Vitae ───────────────────────────────────────────────────────
+
+cv:
+  # ── Motivation paragraph ─────────────────────────────────────────────────
+  motivation: |
+    A brief motivational text that concisely summarizes your personality and
+    professional motivation. This paragraph appears between personal information
+    and core competencies and typically consists of only a few lines.
+
+  # ── Core competencies (groups of bullet points) ───────────────────────────
+  core-competencies:
+    - title: Donut Mastery
+      items:
+        - "Donut Identification: Expert classification of glazed, frosted, sprinkled, and filled varieties."
+        - "Quality Assurance: Rigorous testing methodology through direct consumption and taste evaluation."
+    - title: Leisure & Recreation
+      items:
+        - "Napping: World-class ability to rest uninterrupted during work hours."
+        - "Television Expertise: Unparalleled knowledge of Itchy & Scratchy animation."
+        - "Beverage Connoisseurship: Master-level appreciation of Duff Beer."
+
+  # ── Sidebar ───────────────────────────────────────────────────────────────
+  sidebar:
+    languages:
+      - name: English
+        level: Somewhat fluent
+      - name: "Duff-ese"
+        level: Native speaker
+      - name: "Barfly Slang"
+        level: Fluent
+
+    it-skills:
+      - category: "Napping Techniques"
+        items:
+          - name: "Keyboard Pillow Positioning"
+            level: Expert
+          - name: "Snoring Acoustics"
+            level: Expert
+          - name: "Drool Management"
+            level: Advanced
+      - category: "Donut Metrics"
+        items:
+          - name: "Caloric Estimation"
+            level: Expert
+          - name: "Consumption Rate Analysis"
+            level: Expert
+
+    methods:
+      - "Winging It"
+      - "Avoiding Responsibility"
+      - "Procrastination Excellence"
+      - "Strategic Napping"
+      - "Bar Liaison"
+
+  # ── Education (timeline) ─────────────────────────────────────────────────
+  education:
+    - date: "10/2018 – 06/2023"
+      title: "Master of Science Field of Study"
+      institution: "Springfield University"
+      location: "Springfield"
+      description: "Specialization: Subfield. Master's thesis: Title of final thesis."
+    - date: "10/2014 – 09/2018"
+      title: "Bachelor of Science Field of Study"
+      institution: "Springfield University"
+      location: "Springfield"
+    - date: "08/2005 – 06/2014"
+      title: "General University Entrance Qualification"
+      institution: "Springfield Elementary School"
+
+  # ── Work experience (timeline) ────────────────────────────────────────────
+  work-experience:
+    - date: "01/2023 – present"
+      title: "Safety Inspector"
+      employer: "Springfield Nuclear Power Plant"
+      location: "Springfield"
+      description: "Oversee Sector 7-G operations. Notable achievements: perfected the three-point employee safety checklist."
+    - date: "06/2020 – 12/2022"
+      title: "Donuts Quality Assurance"
+      employer: "Lard Lad Donuts"
+      location: "Springfield"
+      description: "Tested and validated donut quality through rigorous consumption methods."
+
+  # ── Volunteering / Volunteer Work ─────────────────────────────────────────
+  volunteering:
+    - label: Volunteer Work
+      text: "Safety Officer at Springfield Nuclear Power Plant. Member of the Stonecutters Lodge (Secret Number: 908)."
+    - label: Hobbies
+      text: "Watching Itchy & Scratchy, Drinking Duff Beer, Eating Donuts, Napping at work."
+
+  # ── Continuing education ──────────────────────────────────────────────────
+  continuing-education:
+    - date: 2024
+      title: "Advanced Donut Appreciation"
+      description: "Certified expert in identifying and consuming glazed, frosted, and sprinkled varieties."
+    - date: 2022
+      title: "Nuclear Safety Basics"
+      description: "Certification obtained on first attempt. Somehow. Don't ask questions."
+
+  # ── Publications ──────────────────────────────────────────────────────────
+  publications:
+    - label: "Doe et al. (2026)"
+      title: "Why Donuts Are Better Than Work: A Memoir"
+      url: "https://simpsonsfamily.net/memoirs"

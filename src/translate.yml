@@ -1,0 +1,59 @@
+cover-documents:
+  de: "Bewerbungsunterlagen"
+  en: "Application Documents"
+
+application-for:
+  de: "Bewerbung als"
+  en: "Application for the position as"
+
+contents:
+  de: "Inhalt"
+  en: "Contents"
+
+cover-letter:
+  de: "Bewerbungsanschreiben"
+  en: "Cover Letter"
+
+languages:
+  de: "Sprachkenntnisse"
+  en: "Language Skills"
+
+it-skills:
+  de: "IT-Kenntnisse"
+  en: "IT Skills"
+
+methods:
+  de: "Methodenkompetenzen"
+  en: "Methodical Skills"
+
+professional-summary:
+  de: "Berufliches Profil"
+  en: "Professional Summary"
+
+core-competencies:
+  de: "Kernkompetenzen"
+  en: "Core Competencies"
+
+education:
+  de: "Ausbildung"
+  en: "Education"
+
+work-experience:
+  de: "Beruflicher Werdegang"
+  en: "Work Experience"
+
+volunteering:
+  de: "Ehrenämter und Aktivitäten"
+  en: "Volunteering & Activities"
+
+continuing-education:
+  de: "Weiterbildungen"
+  en: "Continuing Education"
+
+publications:
+  de: "Veröffentlichungen"
+  en: "Publications"
+
+certificates:
+  de: "Zeugnisse & Zertifikate"
+  en: "Certificates & References"
