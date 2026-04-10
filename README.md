@@ -3,6 +3,8 @@
 A Typst template for generating complete job application packages with cover letters, CVs, and supporting documents. 
 Data-driven from YAML, fully customizable styling.
 
+![](thumbnail.png)
+
 ## Features
 
 - **Data-Driven**: All content is separated from layout
