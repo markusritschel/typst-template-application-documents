@@ -1,0 +1,103 @@
+# ── Lebenslauf ──────────────────────────────────────────────────────────────
+
+cv:
+  # ── Motivationsparagraf ──────────────────────────────────────────────────
+  motivation: |
+    Ein kurzer Motivationstext, der prägnant Ihre Persönlichkeit und berufliche
+    Motivation zusammenfasst. Dieser Absatz erscheint zwischen persönlichen Daten
+    und Kernkompetenzen und umfasst typischerweise nur wenige Zeilen.
+
+  # ── Kernkompetenzen (Gruppen von Aufzählungspunkten) ──────────────────────
+  core-competencies:
+    - title: Donut-Meisterschaft
+      items:
+        - "Donut-Identifikation: Fachgerechte Klassifikation von glasierten, gefrosteten, gestreuten und gefüllten Sorten."
+        - "Qualitätssicherung: Rigorose Testmethodik durch direkte Verbrauchstests und Geschmacksbeurteilung."
+    - title: Freizeit & Erholung
+      items:
+        - "Nickerchen: Weltklasse-Fähigkeit, ungestört während der Arbeitszeit zu schlafen."
+        - "Fernsehen-Expertise: Unvergleichliches Wissen über Itchy & Scratchy Animation."
+        - "Getränke-Kennerschaft: Meisterhaftes Verständnis für Duff-Bier."
+
+  # ── Seitenleiste ────────────────────────────────────────────────────────
+  sidebar:
+    languages:
+      - name: Englisch
+        level: Einigermaßen fließend
+      - name: "Duff-isch"
+        level: Muttersprache
+      - name: "Kneipen-Slang"
+        level: Fließend
+
+    it-skills:
+      - category: "Nickerchen-Techniken"
+        items:
+          - name: "Tastatur-Kissen-Positionierung"
+            level: Experte
+          - name: "Schnarch-Akustik"
+            level: Experte
+          - name: "Speichel-Management"
+            level: Fortgeschritten
+      - category: "Donut-Metriken"
+        items:
+          - name: "Kalorienschätzung"
+            level: Experte
+          - name: "Verzehrgeschwindigkeitsanalyse"
+            level: Experte
+
+    methods:
+      - "Mit Leidenschaft improvvisieren"
+      - "Verantwortung vermeiden"
+      - "Aufschub-Exzellenz"
+      - "Strategische Nickerchen"
+      - "Kneipenvermittler"
+
+  # ── Ausbildung (Zeitleiste) ─────────────────────────────────────────────
+  education:
+    - date: "10/2018 – 06/2023"
+      title: "Master of Science Studienfach"
+      institution: "Springfield-Universität"
+      location: "Springfield"
+      description: "Spezialisierung: Teilgebiet. Masterarbeit: Titel der Abschlussarbeit."
+    - date: "10/2014 – 09/2018"
+      title: "Bachelor of Science Studienfach"
+      institution: "Springfield-Universität"
+      location: "Springfield"
+    - date: "08/2005 – 06/2014"
+      title: "Allgemeine Hochschulreife"
+      institution: "Springfield-Grundschule"
+
+  # ── Berufliche Erfahrung (Zeitleiste) ────────────────────────────────────
+  work-experience:
+    - date: "01/2023 – heute"
+      title: "Sicherheitsinspektor"
+      employer: "Springfield Kernkraftwerk"
+      location: "Springfield"
+      description: "Überwachung der Operationen in Sektor 7-G. Bemerkenswerte Erfolge: Perfektionierung der dreiteiligen Mitarbeitersicherheitsprüfliste."
+    - date: "06/2020 – 12/2022"
+      title: "Donut-Qualitätssicherung"
+      employer: "Lard Lad Donuts"
+      location: "Springfield"
+      description: "Umfangreiche Tests und Validierung der Donut-Qualität durch rigorose Verbrauchsmethoden."
+
+  # ── Ehrenamtliche Tätigkeit / Freiwilligenarbeit ─────────────────────────
+  volunteering:
+    - label: Ehrenamtliche Tätigkeit
+      text: "Sicherheitsbeamter im Springfield Kernkraftwerk. Mitglied der Steinmetze-Loge (Geheime Nummer: 908)."
+    - label: Hobbys
+      text: "Itchy & Scratchy anschauen, Duff-Bier trinken, Donuts essen, Nickerchen bei der Arbeit."
+
+  # ── Weiterbildung ───────────────────────────────────────────────────────
+  continuing-education:
+    - date: 2024
+      title: "Fortgeschrittene Donut-Wertschätzung"
+      description: "Zertifizierter Experte bei der Identifikation und dem Verzehr von glasierten, gefrosteten und gestreuten Varianten."
+    - date: 2022
+      title: "Grundlagen der Kernkraftsicherheit"
+      description: "Zertifikat beim ersten Versuch erhalten. Irgendwie. Stellen Sie keine Fragen."
+
+  # ── Veröffentlichungen ──────────────────────────────────────────────────
+  publications:
+    - label: "Doe et al. (2026)"
+      title: "Warum Donuts besser sind als Arbeit: Eine Biographie"
+      url: "https://simpsonsfamily.net/memoirs"

@@ -3,6 +3,9 @@
 
 #import "../src/application_docs.typ": render-cv, build-theme
 
-#let data  = yaml("/personal-data.yml")
+#let config = yaml("/config.yml")
+#let lang = config.settings.lang
+#let cvdata = yaml("/cv-data." + lang + ".yml")
+#let data = config + cvdata
 #let theme = build-theme(data)
 #render-cv(data, theme)

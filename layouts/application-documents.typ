@@ -4,7 +4,10 @@
 #import "../src/application_docs.typ": render-cover, render-letter, render-cv, render-certificates, build-theme
 #import "cover-letter.typ": letter   // import letter data only (does not render here)
 
-#let data  = yaml("/personal-data.yml")
+#let config = yaml("/config.yml")
+#let lang = config.settings.lang
+#let cvdata = yaml("/cv-data." + lang + ".yml")
+#let data = config + cvdata
 #let theme = build-theme(data)
 
 // ── Table of contents (update page numbers if content changes) ────────────────
