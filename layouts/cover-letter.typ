@@ -4,8 +4,11 @@
 
 #import "../src/application_docs.typ": render-letter, build-theme
 
-#let data    = yaml("/personal-data.yml")
-#let theme   = build-theme(data)
+#let config = yaml("/config.yml")
+#let lang = config.settings.lang
+#let cvdata = yaml("/cv-data." + lang + ".yml")
+#let data     = config + cvdata
+#let theme    = build-theme(data)
 #let personal = data.personal
 
 // ── Letter content — edit this for each application ──────────────────────────
