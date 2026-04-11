@@ -11,12 +11,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Multi-language Support**: CV content is now language-specific with separate YAML files (`cv-data.en.yml`, `cv-data.de.yml`, etc.)
 - **Dynamic Language Loading**: Language setting in `config.yml` automatically determines which CV data file is loaded at compile time
 - **German Translation**: Complete German translation of CV data file (`cv-data.de.yml`)
+- **Markdown Cover Letter** (#1): Cover letters can now be written in Markdown with YAML frontmatter for metadata
+  - No need to edit `.typ` files—users only edit `cover-letter.md`
+  - Recipient data, position, and date in YAML frontmatter
+  - Letter body supports full Markdown formatting
+  - Built on `cmarker` package for frontmatter parsing
 - **CHANGELOG.md**: This file to track project changes
 
 ### Changed
 - **Configuration Refactoring**: Consolidated configuration into a single `config.yml` file
   - Contains `settings` block (theme, colors, fonts, language)
   - Contains `personal` block (contact details, photo, signature, social profiles)
+- **Cover Letter Workflow**: Users no longer edit `layouts/cover-letter.typ` for letter content
+  - Letter content moved to `cover-letter.md` with YAML frontmatter
+  - `layouts/cover-letter.typ` now only handles Markdown parsing and rendering
 - **File Structure**: Separated CV data from configuration
   - Old: Single `personal-data.yml` file with mixed content
   - New: `config.yml` (settings + personal details) + `cv-data.{lang}.yml` (language-specific CV content)
@@ -28,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Clarified file structure and configuration approach
   - Added notes on file path conventions (absolute paths with `/` refer to project root)
   - Added section on adding new languages
+  - Updated cover letter workflow documentation
 
 ### Removed
 - **personal-data.yml**: Replaced by `config.yml` and `cv-data.{lang}.yml` files

@@ -46,24 +46,29 @@ To change the language, simply update the `lang` setting in `config.yml` and the
 >
 > **Note on file paths:** Paths starting with `/` (e.g., `/photo.png`, `/signature.png`) refer to the project root directory, not the system root.
 
-### 3. Optional: Write your Cover Letter
+### 3. Write your Cover Letter
 
-Edit `layouts/cover-letter.typ` to customize the cover letter for each application:
-```typst
-#let letter = (
-  position: "Your Target Job Title",
-  date: "Today's Date",
-  recipient: (
-    contact: "Hiring Manager Name",
-    company: "Company Name",
-    street: "Street Address",
-    city: "City, Country",
-  ),
-  body: [
-    Letter content here with **bold**, *italic*, etc.
-  ],
-)
+Edit `cover-letter.md` to customize the cover letter for each application. The file uses YAML frontmatter for metadata and Markdown for the letter body:
+
+```markdown
+---
+position: Your Target Job Title
+date: Today's Date
+recipient:
+  contact: Hiring Manager Name
+  company: Company Name
+  street: Street Address
+  city: City, Country
+---
+
+Dear Sir or Madam,
+
+Letter content here with **bold**, *italic*, and other Markdown formatting.
+
+Best regards,
 ```
+
+The YAML frontmatter contains all application-specific information, while the Markdown body supports full formatting. You don't need to edit any `.typ` files—just this one Markdown file per application!
 
 Of course, you can also just compile the CV without a cover letter.
 
@@ -71,10 +76,10 @@ Of course, you can also just compile the CV without a cover letter.
 
 ```bash
 # Full application package
-typst compile --root . layouts/cv.typ cv.pdf
-
-# Full application package
 typst compile --root . layouts/application-documents.typ full-application.pdf
+
+# Just the CV
+typst compile --root . layouts/cv.typ cv.pdf
 
 # Just the cover letter
 typst compile --root . layouts/cover-letter.typ cover-letter.pdf

@@ -11,6 +11,11 @@ keywords = ["application", "cover-letter", "CV", "resume", "job", "YAML", "profe
 categories = ["cv"]
 disciplines = []
 
+[dependencies]
+cheq = "0.3.0"
+cmarker = "0.1.0"
+fontawesome = "0.6.0"
+
 [template]
 path = "layouts"
 entrypoint = "application-documents.typ"
