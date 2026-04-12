@@ -4,6 +4,7 @@
 
 #import "@preview/cheq:0.3.0": checklist
 #import "@preview/fontawesome:0.6.0": *
+#import "rendering.typ": *
 
 // ─── Translations ──────────────────────────────────────────────────────────────
 
@@ -62,18 +63,6 @@
     )
     #v(.4em)
   ]
-}
-
-// Two-column timeline row: narrow right-aligned date | wide content
-#let cv-row(date, body, theme) = {
-  grid(
-    columns: (2.5cm, 1fr),
-    gutter: 1em,
-    align: (right + top, left + top),
-    text(size: 8.5pt, fill: theme.meta)[#date],
-    body,
-  )
-  v(.3em)
 }
 
 // ─── Cover page (Deckblatt) ───────────────────────────────────────────────────
@@ -312,9 +301,12 @@
         [
           #if "motivation" in cv {
             bm-section(tr("professional-summary", theme.lang), theme)
-            [#set text(size: 9pt, style: "normal")
-            #set par(justify: true)
-            #eval(cv.motivation, mode: "markup")]
+            [
+              #set text(size: 9pt, style: "normal")
+              #set par(justify: true)
+              #eval(cv.motivation, mode: "markup")
+            ]
+            let _ = cv.remove("motivation")
           }
           #if "core-competencies" in cv {
             bm-section(tr("core-competencies", theme.lang), theme)
@@ -328,11 +320,13 @@
               ]
               #v(.3em)
             ]
+            let _ = cv.remove("core-competencies")
           }
         ],
         [
           #if "sidebar" in cv {
             render-sidebar(cv.sidebar, theme)
+            let _ = cv.remove("sidebar")
           }
         ],
       )
@@ -340,75 +334,12 @@
 
     // ── Full-width zone: flows naturally across pages ──
 
-    #if "education" in cv {
-      bm-section(tr("education", theme.lang), theme)
-      for entry in cv.at("education") [
-        #cv-row(entry.date, [
-          #block(sticky: true)[
-            #text(weight: "bold")[#entry.title],
-            #text(style: "italic")[#entry.at("institution", default: "")]#if "location" in entry [, #entry.location].
-            #if "description" in entry [
-              #v(.1em)
-              #text(size: 9pt)[#eval(entry.description, mode: "markup")]
-            ]
-          ]
-        ], theme)
-      ]
-    }
+    #for (section-name, content) in cv [
+      #let (keys, renderer) = cv-section-registry.at(section-name)
 
-    #if "work-experience" in cv {
-      bm-section(tr("work-experience", theme.lang), theme)
-      for entry in cv.at("work-experience") [
-        #cv-row(entry.date, [
-          #block(sticky: true)[
-            #text(weight: "bold")[#entry.title],
-            // NOTE: institution = employer
-            #text(style: "italic")[#entry.at("employer", default: "")]#if "location" in entry [, #entry.location].
-            #if "description" in entry [
-              #v(.1em)
-              #text(size: 9pt)[#eval(entry.description, mode: "markup")]
-            ]
-          ]
-        ], theme)
-      ]
-    }
-
-    #if "volunteering" in cv {
-      bm-section(tr("volunteering", theme.lang), theme)
-      for entry in cv.at("volunteering") [
-        #cv-row(entry.label, [
-          #set text(size: 9pt, style: "normal")
-          #eval(entry.text, mode: "markup")#if "url" in entry { " (" + link(entry.url)[#entry.url] + ")" }
-        ], theme)
-      ]
-    }
-
-    #if "continuing-education" in cv {
-      bm-section(tr("continuing-education", theme.lang), theme)
-      for entry in cv.at("continuing-education") [
-        #cv-row(str(entry.date), [
-          #block(sticky: true)[
-            #text(weight: "bold")[#entry.title]
-            // NOTE: institution = employer
-            #text(style: "italic")[#entry.at("institution", default: "")]#if "location" in entry [, #entry.location].
-            #if "description" in entry [
-              #v(.1em)
-              #text(size: 9pt)[#eval(entry.description, mode: "markup")]
-            ]
-          ]
-        ], theme)
-      ]
-    }
-
-    #if "publications" in cv {
-      bm-section(tr("publications", theme.lang), theme)
-      for entry in cv.publications [
-        #cv-row(entry.label, [
-          #set text(size: 9pt, style: "normal")
-          #eval(entry.title, mode: "markup")#if "url" in entry { " (" + link(entry.url)[#entry.url] + ")" }
-        ], theme)
-      ]
-    }
+      #bm-section-header(tr(section-name, theme.lang), theme)
+      #renderer(section-name, content, keys, theme)
+    ]
 
     // ── Signature at end of CV ──
     #if "signature" in data.personal {
