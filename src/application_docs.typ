@@ -52,13 +52,13 @@
 // CV section header: filled blue bar + title text
 // sticky: true prevents a page break between the heading and the first entry below it
 #let bm-section-header(title, theme) = {
-  v(1.2em)
+  let block-width = 2.65cm
   block(sticky: true)[
     #grid(
-      columns: (2.5cm, auto),
+      columns: (block-width, auto),
       gutter: 1em,
       align: horizon,
-      rect(width: 2.5cm, height: 5pt, fill: theme.accent, stroke: none),
+      rect(width: block-width, height: 5pt, fill: theme.accent, stroke: none),
       text(size: 13pt, fill: theme.accent, weight: "semibold")[#title],
     )
     #v(.4em)
@@ -221,11 +221,11 @@
     [#bm-icon("location", color: theme.accent, width: icon-width) #h(icon-space) #personal.at("address-street")\ #h(icon-width + 1.5*icon-space) #personal.at("address-city")],
     [#bm-icon("email",    color: theme.accent, width: icon-width) #h(icon-space) #link("mailto:"+personal.email)[#personal.email]],
     [#bm-icon("phone",    color: theme.accent, width: icon-width) #h(icon-space) #link("tel:"+personal.phone)[#personal.phone]],
-    [#bm-icon("website",  color: theme.accent, width: icon-width) #h(icon-space) #link(personal.website)[#personal.website]]
+    [#bm-icon("website",  color: theme.accent, width: icon-width) #h(icon-space) #link(personal.website)[#personal.website.split("//").at(-1)]]
   )
   if "profiles" in personal {
     items += personal.profiles.map(p =>
-      [#bm-icon(lower(p.network), color: theme.accent, width: icon-width) #h(icon-space) #link(p.url)[#p.url.split("/").at(-1)]]
+      [#bm-icon(lower(p.network), color: theme.accent, width: icon-width) #h(icon-space) #link(p.url)[#p.url.split("//").at(-1)]]
     )
   }
   let mid = calc.floor(items.len() / 2)
@@ -308,6 +308,7 @@
               #eval(cv.motivation, mode: "markup")
             ]
             let _ = cv.remove("motivation")
+            v(1.2em)
           }
           #if "core-competencies" in cv {
             bm-section-header(tr("core-competencies", theme.lang), theme)
@@ -322,6 +323,7 @@
               #v(.3em)
             ]
             let _ = cv.remove("core-competencies")
+            v(1.2em)
           }
         ],
         [
@@ -340,6 +342,7 @@
 
       #bm-section-header(tr(section-name, theme.lang), theme)
       #renderer(section-name, content, keys, theme)
+      #v(1.2em)
     ]
 
     // ── Signature at end of CV ──

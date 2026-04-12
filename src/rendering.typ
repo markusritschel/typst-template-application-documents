@@ -2,7 +2,7 @@
 // Two-column timeline row: narrow right-aligned date | wide content
 #let cv-row(date, body, theme) = {
   grid(
-    columns: (2.5cm, 1fr),
+    columns: (2.65cm, 1fr),
     gutter: 1em,
     align: (right + top, left + top),
     text(size: 9pt, fill: theme.meta)[#date],
@@ -25,7 +25,7 @@
     #let description = entry.at("description", default: "")
 
     #cv-row(
-      entry.date, 
+      text(size: 9pt)[#entry.date],
       [
         #block(sticky: true)[#{ // content expressions are concatenated without any automatic whitespace
           text(weight: "bold")[#entry.title]
@@ -51,7 +51,7 @@
   
   for entry in items [
     #cv-row(
-      entry.label,
+      text(size: 9pt)[#align(left)[#entry.label]],
       [
         #set text(size: 9pt, style: "normal")
         #eval(entry.at(description-key), mode: "markup")#if "url" in entry { " (" + link(entry.url)[#entry.url] + ")" }
