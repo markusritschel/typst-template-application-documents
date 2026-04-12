@@ -5,7 +5,7 @@
     columns: (2.5cm, 1fr),
     gutter: 1em,
     align: (right + top, left + top),
-    text(size: 8.5pt, fill: theme.meta)[#date],
+    text(size: 9pt, fill: theme.meta)[#date],
     body,
   )
   v(.3em)
@@ -14,7 +14,10 @@
 // Define views for CV sections
 
 #let timeline-view(section-name, items, keys, theme) = {
-  let institution-key = if "institution" in keys { "institution" } else if "employer" in keys { "employer" } else { "" }
+  // Allow different identifiers for institution
+  let institution-key = if "institution" in keys { "institution" } 
+                   else if "employer" in keys { "employer" } 
+                   else { "" }
 
   for entry in items [
     #let institution = entry.at(institution-key, default: "")
@@ -24,15 +27,15 @@
     #cv-row(
       entry.date, 
       [
-        #block(sticky: true)[
-          #text(weight: "bold")[#entry.title]
-          #if institution.len() > 0 [, #text(style: "italic")[#institution]]
-          #if location.len() > 0 [, #location].
-          #if description.len() > 0 [
-            #v(.1em)
+        #block(sticky: true)[#{ // content expressions are concatenated without any automatic whitespace
+          text(weight: "bold")[#entry.title]
+          if institution.len() > 0 [, #text(style: "italic")[#institution]]
+          if location.len() > 0 [, #location]
+          if description.len() > 0 [
+            #v(-4pt)
             #text(size: 9pt)[#eval(description, mode: "markup")]
           ]
-        ]
+        }]
       ],
       theme
     )
@@ -40,6 +43,7 @@
 }
 
 #let label-view(section-name, items, keys, theme) = {
+  // Allow different identifiers for details
   let description-key = if "description" in keys { "description" } 
                    else if "text" in keys { "text" } 
                    else if "title" in keys { "title" } 

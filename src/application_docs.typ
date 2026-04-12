@@ -202,7 +202,8 @@
     sidebar-heading(tr("methods", theme.lang), theme)
     v(.1em)
     for m in sidebar.methods {
-      [#text(size: 8.5pt)[#m] \
+      [
+        #text(size: 9pt)[#m] #v(-4pt)
       ]
     }
   }
