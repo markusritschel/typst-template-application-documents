@@ -51,7 +51,7 @@
 
 // CV section header: filled blue bar + title text
 // sticky: true prevents a page break between the heading and the first entry below it
-#let bm-section(title, theme) = {
+#let bm-section-header(title, theme) = {
   v(1.2em)
   block(sticky: true)[
     #grid(
@@ -98,7 +98,7 @@
   #v(1fr)
 
   #if toc.len() > 0 [
-    #bm-section(tr("contents", theme.lang), theme)
+    #bm-section-header(tr("contents", theme.lang), theme)
     #v(.3em)
     #for (title, page) in toc [
       #title #box(width: 1fr, repeat[.]) #str(page) \
@@ -300,7 +300,7 @@
         gutter: 2.5em,
         [
           #if "motivation" in cv {
-            bm-section(tr("professional-summary", theme.lang), theme)
+            bm-section-header(tr("professional-summary", theme.lang), theme)
             [
               #set text(size: 9pt, style: "normal")
               #set par(justify: true)
@@ -309,7 +309,7 @@
             let _ = cv.remove("motivation")
           }
           #if "core-competencies" in cv {
-            bm-section(tr("core-competencies", theme.lang), theme)
+            bm-section-header(tr("core-competencies", theme.lang), theme)
             for group in cv.at("core-competencies") [
               #align(center)[
                 #text(size: 10pt, fill: theme.accent)[#smallcaps(group.title)]
