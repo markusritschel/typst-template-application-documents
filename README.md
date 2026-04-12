@@ -93,7 +93,7 @@ typst watch --root . layouts/application-documents.typ full-application.pdf
 > Simply run `just` in your terminal to see the available commands and execute them as needed.
 
 > [!Note]
-> Note that Typst cannot automatically update page numbers, so if you change the content, make sure to update the `toc` variable in `layouts/application-documents.typ` with the correct page numbers for each section.
+> Typst cannot track page numbers automatically. If your content shifts pages, update the `toc` entries in `config.yml` with the correct page numbers.
 
 ## Project Structure
 
@@ -107,6 +107,7 @@ typst watch --root . layouts/application-documents.typ full-application.pdf
 ├── signature.png                   # Your signature (optional)
 ├── src/
 │   ├── application_docs.typ        # Main template functions
+│   ├── rendering.typ               # CV section renderers
 │   └── translate.yml               # Multi-language strings
 └── layouts/
     ├── application-documents.typ   # Full package entry point
@@ -153,7 +154,27 @@ personal:
       url: https://github.com/johndoe
 ```
 
+### Table of Contents & Certificates
+
+Configure the cover page table of contents and the certificates list in `config.yml`:
+
+```yaml
+toc:
+  - ["Cover Letter", 2]
+  - ["Curriculum Vitae", 3]
+  - ["Certificates & Testimonials", 5]
+
+certificates:
+  - High School Diploma
+  - University Certificates
+  - Driver's Licenses
+```
+
+Each `toc` entry is a `[title, page]` pair. Update the page numbers manually whenever content shifts pages.
+
 ### CV Sections
+
+The order of sections in the rendered CV follows the key order in `cv-data.{lang}.yml` — reorder them there to change their order in the PDF.
 
 Create language-specific CV data files like `cv-data.en.yml` with these sections:
 

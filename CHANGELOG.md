@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **`toc` and `certificates` in `config.yml`** (#7): The cover page table of contents and the certificates list are now configured directly in `config.yml`. No layout `.typ` file needs to be edited for these anymore.
 - **Multi-language Support**: CV content is now language-specific with separate YAML files (`cv-data.en.yml`, `cv-data.de.yml`, etc.)
 - **Dynamic Language Loading**: Language setting in `config.yml` automatically determines which CV data file is loaded at compile time
 - **German Translation**: Complete German translation of CV data file (`cv-data.de.yml`)
@@ -19,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CHANGELOG.md**: This file to track project changes
 
 ### Changed
+- **CV section order**: The order in which CV sections appear in the rendered document now follows the key order in `cv-data.{lang}.yml`. Reorder sections in that file to change their order in the PDF—no template editing needed.
+- **CV header contact grid** (#6): All contact details (location, email, phone, website) and social profiles are now displayed together in a single unified two-column grid with consistent icon alignment.
 - **Configuration Refactoring**: Consolidated configuration into a single `config.yml` file
   - Contains `settings` block (theme, colors, fonts, language)
   - Contains `personal` block (contact details, photo, signature, social profiles)
