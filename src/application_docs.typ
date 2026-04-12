@@ -23,7 +23,7 @@
 
 // ─── Shared utilities ─────────────────────────────────────────────────────────
 
-#let bm-icon(name, color: bm-defaults.meta) = {
+#let bm-icon(name, color: bm-defaults.meta, width: 0.8em) = {
   let map = (
     bluesky:  "bluesky",
     email:    "envelope",
@@ -35,7 +35,9 @@
     twitter:  "x-twitter",
     website:  "earth-americas",
   )
-  fa-icon(map.at(name, default: name), solid: true, fill: color, size: .85em)
+  box(width: width, align(center)[
+    #fa-icon(map.at(name, default: name), solid: true, fill: color, size: .85em)
+  ])
 }
 
 // Large page-level heading with full-width underline rule
@@ -217,15 +219,39 @@
 
 // ─── Lebenslauf header ────────────────────────────────────────────────────────
 
-#let render-cv-header(personal, theme) = {
+#let contact-grid(personal, theme) = {
   let icon-space = 4pt
+  let icon-width = 0.8em
+  let item-spacing = 0.6em
+
+  // Collect all items in a single list, then split into two columns with a vertical midpoint.
+  let items =(
+    [#bm-icon("location", color: theme.accent, width: icon-width) #h(icon-space) #personal.at("address-street")\ #h(icon-width + 1.5*icon-space) #personal.at("address-city")],
+    [#bm-icon("email",    color: theme.accent, width: icon-width) #h(icon-space) #link("mailto:"+personal.email)[#personal.email]],
+    [#bm-icon("phone",    color: theme.accent, width: icon-width) #h(icon-space) #link("tel:"+personal.phone)[#personal.phone]],
+    [#bm-icon("website",  color: theme.accent, width: icon-width) #h(icon-space) #link(personal.website)[#personal.website]]
+  )
+  if "profiles" in personal {
+    items += personal.profiles.map(p =>
+      [#bm-icon(lower(p.network), color: theme.accent, width: icon-width) #h(icon-space) #link(p.url)[#p.url.split("/").at(-1)]]
+    )
+  }
+  let mid = calc.floor(items.len() / 2)
+
+  grid(
+    columns: (1fr, 1fr),
+    gutter: .5em,
+    stack(dir: ttb, spacing: item-spacing, ..items.slice(0, mid)),
+    stack(dir: ttb, spacing: item-spacing, ..items.slice(mid)),
+  )
+}
+
+#let render-cv-header(personal, theme) = {
   set align(center)
 
   // Page title
   text(size: 14pt, fill: theme.text, weight: "regular")[#smallcaps("Curriculum Vitae")]
   v(1.15em)
-  // line(length: 100%, stroke: 1pt + theme.accent)
-  // v(.6em)
 
   // Name
   text(size: 22pt, weight: "regular", fill: theme.accent)[#personal.at("first-name")]
@@ -245,24 +271,7 @@
   // Two-column contact grid
   block(width: 80%)[
     #set align(left)
-    #grid(
-      columns: (1fr, 1fr),
-      gutter: .5em,
-      [
-        #bm-icon("location", color: theme.accent) #h(icon-space) #personal.at("address-street")\ #h(.8em+icon-space) #personal.at("address-city") \
-        #bm-icon("email", color: theme.accent) #h(icon-space) #link("mailto:"+personal.email)[#personal.email] \
-        #bm-icon("phone", color: theme.accent) #h(icon-space) #link("tel:"+personal.phone)[#personal.phone] \
-        #bm-icon("website", color: theme.accent) #h(icon-space) #link(personal.website)[#personal.website]
-      ],
-      [
-        #if "profiles" in personal {
-          for profile in personal.profiles [
-            #bm-icon(lower(profile.network), color: theme.accent) #h(icon-space)
-            #link(profile.url)[#profile.url.split("/").at(-1)] \
-          ]
-        }
-      ],
-    )
+    #contact-grid(personal, theme)
   ]
 
   v(.3em)
