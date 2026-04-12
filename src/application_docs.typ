@@ -342,15 +342,15 @@
 
     #if "education" in cv {
       bm-section(tr("education", theme.lang), theme)
-      for entry in cv.education [
+      for entry in cv.at("education") [
         #cv-row(entry.date, [
           #block(sticky: true)[
             #text(weight: "bold")[#entry.title],
             #text(style: "italic")[#entry.at("institution", default: "")]#if "location" in entry [, #entry.location].
-          ]
-          #if "description" in entry [
-            #v(.1em)
-            #text(size: 9pt)[#eval(entry.description, mode: "markup")]
+            #if "description" in entry [
+              #v(.1em)
+              #text(size: 9pt)[#eval(entry.description, mode: "markup")]
+            ]
           ]
         ], theme)
       ]
@@ -362,11 +362,12 @@
         #cv-row(entry.date, [
           #block(sticky: true)[
             #text(weight: "bold")[#entry.title],
+            // NOTE: institution = employer
             #text(style: "italic")[#entry.at("employer", default: "")]#if "location" in entry [, #entry.location].
-          ]
-          #if "description" in entry [
-            #v(.1em)
-            #text(size: 9pt)[#eval(entry.description, mode: "markup")]
+            #if "description" in entry [
+              #v(.1em)
+              #text(size: 9pt)[#eval(entry.description, mode: "markup")]
+            ]
           ]
         ], theme)
       ]
@@ -374,9 +375,10 @@
 
     #if "volunteering" in cv {
       bm-section(tr("volunteering", theme.lang), theme)
-      for entry in cv.volunteering [
+      for entry in cv.at("volunteering") [
         #cv-row(entry.label, [
-          #text(size: 9pt)[#eval(entry.text, mode: "markup")]
+          #set text(size: 9pt, style: "normal")
+          #eval(entry.text, mode: "markup")#if "url" in entry { " (" + link(entry.url)[#entry.url] + ")" }
         ], theme)
       ]
     }
@@ -385,9 +387,14 @@
       bm-section(tr("continuing-education", theme.lang), theme)
       for entry in cv.at("continuing-education") [
         #cv-row(str(entry.date), [
-          #text(weight: "bold")[#entry.title]#if "description" in entry [,
-            #v(.1em)
-            #text(size: 9pt)[#eval(entry.description, mode: "markup")]
+          #block(sticky: true)[
+            #text(weight: "bold")[#entry.title]
+            // NOTE: institution = employer
+            #text(style: "italic")[#entry.at("institution", default: "")]#if "location" in entry [, #entry.location].
+            #if "description" in entry [
+              #v(.1em)
+              #text(size: 9pt)[#eval(entry.description, mode: "markup")]
+            ]
           ]
         ], theme)
       ]
@@ -398,7 +405,7 @@
       for entry in cv.publications [
         #cv-row(entry.label, [
           #set text(size: 9pt, style: "normal")
-          #eval(entry.title, mode: "markup")#if "url" in entry { ": " + link(entry.url)[#entry.url] }
+          #eval(entry.title, mode: "markup")#if "url" in entry { " (" + link(entry.url)[#entry.url] + ")" }
         ], theme)
       ]
     }
