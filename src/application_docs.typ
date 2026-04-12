@@ -108,10 +108,12 @@
 
   #v(1fr)
 
-  #bm-section(tr("contents", theme.lang), theme)
-  #v(.3em)
-  #for (title, page) in toc [
-    #title #box(width: 1fr, repeat[.]) #str(page) \
+  #if toc.len() > 0 [
+    #bm-section(tr("contents", theme.lang), theme)
+    #v(.3em)
+    #for (title, page) in toc [
+      #title #box(width: 1fr, repeat[.]) #str(page) \
+    ]
   ]
 ]
 

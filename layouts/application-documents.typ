@@ -9,23 +9,8 @@
 #let cvdata = yaml("/cv-data." + lang + ".yml")
 #let data = config + cvdata
 #let theme = build-theme(data)
-
-// ── Table of contents (update page numbers if content changes) ────────────────
-
-#let toc = (
-  ("Cover Letter",   2),
-  ("Curriculum Vitae",              3),
-  ("Certificates & Testimonials", 5),
-)
-
-#let certificates = (
-  "High School Diploma",
-  "University Certificates",
-  "Driver's Licenses",
-  "Personal ID"
-)
-
-// ───────────────────────────────────────────────────────────
+#let toc = config.at("toc", default: ())
+#let certificates = config.at("certificates", default: ())
 
 #render-cover(data.personal, letter.position, toc, theme)
 #render-letter(data.personal, letter, theme)

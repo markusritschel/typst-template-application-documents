@@ -29,3 +29,14 @@ personal:
       url: https://bsky.app/jdoe
     - network: LinkedIn
       url: https://linkedin.com/in/johndoe
+
+toc:
+  - ["Cover Letter", 2]
+  - ["Curriculum Vitae", 3]
+  - ["Certificates & Testimonials", 5]
+
+certificates:
+  - High School Diploma
+  - University Certificates
+  - Driver's Licenses
+  - Personal ID
