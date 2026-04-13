@@ -15,5 +15,5 @@
 #render-cover(data.personal, letter.position, toc, theme)
 #render-letter(data.personal, letter, theme)
 #render-cv(data, theme)
-#render-publications(theme)
+#render-publications(data, theme)
 #render-certificates(certificates, theme)

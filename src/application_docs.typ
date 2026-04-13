@@ -4,6 +4,8 @@
 
 #import "@preview/cheq:0.3.0": checklist
 #import "@preview/fontawesome:0.6.0": *
+#import "@preview/pergamon:0.8.0": *
+#import "@preview/citegeist:0.2.2": load-bibliography as parse-bib
 #import "rendering.typ": *
 
 // ─── Translations ──────────────────────────────────────────────────────────────
@@ -379,23 +381,70 @@
 ]
 
 // ─── Publications (Veröffentlichungen) ───────────────────────────────────────
+#let render-publications(data, theme) = [
+  #set text(font: theme.font, size: theme.size, fill: theme.text)
+  #set par(justify: true)
 
-#let render-publications(theme) = {
-  set text(font: theme.font, size: theme.size, fill: theme.text)
-  set par(justify: true)
+  #bm-page-heading(tr("publications", theme.lang), theme)
 
-  bm-page-heading(tr("publications", theme.lang), theme)
-
-  show bibliography: set text(fill: theme.text, font: theme.font, size: theme.size)
-  show bibliography: set par(justify: true)
-
-  bibliography(
-    "/citations.bib",
-    full: true,
-    title: none,
-    style: "apa",
+  #let bib-sections = (
+    ("pub-articles",   ("article")),
+    // ("pub-proceeding", ("inproceedings", "proceedings")),
+    ("pub-proceeding", ("conference")),
+    ("pub-reports",    ("techreport", "report")),
+    ("pub-conference", ("conference", "inproceedings", "proceedings")),
+    ("pub-theses",     ("phdthesis", "mastersthesis", "thesis")),
   )
-}
+
+  #show link: it => {
+    set text(fill: theme.accent)
+    it
+  }
+
+  // Pre-parse bib to skip empty sections
+  #let _parsed-bib = parse-bib(read("/citations.bib"))
+  #add-bib-resource(read("/citations.bib"))
+
+  #for (section, types) in bib-sections {
+    // Skip if no entries of the given type(s) are present in the bibliography
+    let has-entries = _parsed-bib.values().any(r => r.entry_type in types)
+    if not has-entries { continue }
+    
+    let style = format-citation-numeric()
+    refsection(style: numeric-style())[
+      #print-bibliography(
+        title: bm-section-header(tr(section, theme.lang), theme), 
+        filter: r => r.entry_type in types,
+        show-all: true, 
+        resume-after: auto,
+        sorting: "ydnt", 
+        outlined: false,
+        format-reference: format-reference(
+          print-identifiers: ("doi", "url"),
+          link-titles: false,
+          reference-label: style.reference-label,
+          format-quotes: it => ["#it"],
+          print-date-after-authors: true,
+          comma: ",",
+          maxnames: 3,
+          format-fields: (
+            "author": (ddfmt, value, reference, field, options, style) => {
+              let formatted-names = value.map(d => {
+                let highlighted = (d.family == data.personal.last-name)
+                let name = format-name(d, format: "{family}")
+                if highlighted { strong(name) } else { name }
+              })
+              concatenate-names(formatted-names, maxnames: 3)
+            }
+          )
+        ),
+        // label-generator: style.label-generator
+      )
+    ]
+  v(1em)
+  }
+]
+
 
 // ─── Theme builder ────────────────────────────────────────────────────────────
 

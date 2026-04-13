@@ -4,6 +4,9 @@
 #import "../src/application_docs.typ": render-publications, build-theme
 
 #let config = yaml("/config.yml")
-#let theme = build-theme(config)
+#let lang = config.settings.lang
+#let cvdata = yaml("/cv-data." + lang + ".yml")
+#let data = config + cvdata
+#let theme = build-theme(data)
 
-#render-publications(theme)
+#render-publications(data, theme)

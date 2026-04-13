@@ -54,6 +54,22 @@ publications:
   de: "Veröffentlichungen"
   en: "Publications"
 
+pub-articles:
+  de: "Zeitschriftenartikel"
+  en: "Journal Articles"
+
+pub-conference:
+  de: "Konferenzbeiträge"
+  en: "Conference Contributions"
+
+pub-reports:
+  de: "Technische Berichte & Sonstiges"
+  en: "Technical Reports & Other"
+
+pub-theses:
+  de: "Dissertationen & Abschlussarbeiten"
+  en: "Theses"
+
 certificates:
   de: "Zeugnisse & Referenzen"
   en: "Certificates & References"
