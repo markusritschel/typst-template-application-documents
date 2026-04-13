@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Publication list** (`layouts/publications.typ`): New standalone layout that renders a publications page from a `citations.bib` file. Compile with `typst compile --root . layouts/publications.typ publications.pdf` or via `just publications`.
+- **Publication categories**: Publications are automatically grouped into labelled sections (Journal Articles, Conference Contributions, Technical Reports, Theses) based on BibTeX entry types. Sections with no matching entries are skipped. The author matching the CV owner's last name is highlighted in bold.
+- **Section skipping via underscore prefix**: Any CV section whose key starts with `_` is silently skipped during rendering — useful for drafting or temporarily hiding sections without deleting them.
+- **Justfile `mode` parameter**: All `just` targets now accept an optional `mode` argument (`compile` or `watch`). For example, `just cv watch` switches a target into watch mode without needing a separate recipe.
+- **New translation keys** in `src/translate.yml`: `pub-articles`, `pub-conference`, `pub-reports`, `pub-theses` (English and German).
+- **New Typst dependencies**: `@preview/pergamon:0.8.0` and `@preview/citegeist:0.2.2` for bibliography parsing and rendering.
 - **`toc` and `certificates` in `config.yml`** (#7): The cover page table of contents and the certificates list are now configured directly in `config.yml`. No layout `.typ` file needs to be edited for these anymore.
 - **Multi-language Support**: CV content is now language-specific with separate YAML files (`cv-data.en.yml`, `cv-data.de.yml`, etc.)
 - **Dynamic Language Loading**: Language setting in `config.yml` automatically determines which CV data file is loaded at compile time
@@ -20,6 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CHANGELOG.md**: This file to track project changes
 
 ### Changed
+- **Personal section moved to CV YAML** (#10): The `personal:` block has been moved from `config.yml` into `cv-data.{lang}.yml`. Personal information is content, not configuration, so it now lives alongside the rest of the CV data. `config.yml` now contains only `settings:`, `toc:`, and `certificates:`.
+- **Cover Letter body**: The applicant's name is no longer automatically appended to the rendered cover letter. Add it manually as part of the closing in `cover-letter.md`.
+- **CV spacing and font sizes**: Corrected vertical spacing between entry titles and descriptions, sidebar font size, and spacing around commas throughout the CV.
 - **CV section order**: The order in which CV sections appear in the rendered document now follows the key order in `cv-data.{lang}.yml`. Reorder sections in that file to change their order in the PDF—no template editing needed.
 - **CV header contact grid** (#6): All contact details (location, email, phone, website) and social profiles are now displayed together in a single unified two-column grid with consistent icon alignment.
 - **Configuration Refactoring**: Consolidated configuration into a single `config.yml` file

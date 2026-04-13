@@ -24,27 +24,26 @@ See https://typst.app/ for details.
 The template uses a language-based configuration approach:
 
 **Configuration Files:**
-- `config.yml` - Settings (colors, fonts, language) and personal details
-- `cv-data.{lang}.yml` - Language-specific CV content (e.g., `cv-data.en.yml`, `cv-data.de.yml`)
+- `config.yml`: Settings (language, colors, fonts), table of contents, and certificates list
+- `cv-data.{lang}.yml`: Language-specific CV content and personal details (e.g., `cv-data.en.yml`, `cv-data.de.yml`)
 
-Edit `config.yml` with your personal information and styling:
-- Personal details (name, address, contact, photo)
-- Theme colors and fonts
+Edit `config.yml` with your styling preferences:
 - Language setting (controls which CV data file is loaded)
+- Theme colors and fonts
 
-Create language-specific CV data files (e.g., `cv-data.en.yml` for English, `cv-data.de.yml` for German) with your CV sections:
-- Education, work experience, skills, languages, etc.
+Edit the `personal:` section in your `cv-data.{lang}.yml` file (e.g., `cv-data.en.yml` for English, `cv-data.de.yml` for German)  with your contact details, photo, and social profiles. 
+Then add your CV sections: Education, work experience, skills, languages, etc.
 
 To change the language, simply update the `lang` setting in `config.yml` and the appropriate language-specific CV file will be loaded automatically.
 
 > [!Important]
 > Your root directory must contain:
 > - `config.yml` (required) 
-> - At least one `cv-data.{lang}.yml` file matching your chosen language
+> - At least one `cv-data.{lang}.yml` file matching your chosen language (must include a `personal:` section)
 > 
-> The `photo.png` and `signature.png` are optional. If you choose not to include them, remove the corresponding entries from `config.yml` to avoid compilation errors.
+> The `photo.png` and `signature.png` are optional. If you choose not to include them, remove the corresponding entries from `cv-data.{lang}.yml` to avoid compilation errors.
 >
-> **Note on file paths:** Paths starting with `/` (e.g., `/photo.png`, `/signature.png`) refer to the project root directory, not the system root.
+> **Note on file paths:** Paths starting with `/` (e.g., `/photo.png`, `/signature.png`) refer to the project's root directory.
 
 ### 3. Write your Cover Letter
 
@@ -84,13 +83,20 @@ typst compile --root . layouts/cv.typ cv.pdf
 # Just the cover letter
 typst compile --root . layouts/cover-letter.typ cover-letter.pdf
 
-# Watch mode (auto-recompile on changes; great for writing)
-typst watch --root . layouts/application-documents.typ full-application.pdf
+# Publications list (requires citations.bib in project root)
+typst compile --root . layouts/publications.typ publications.pdf
 ```
 
 > [!Tip]
 > If you have justfile installed, you can also use shortcuts for these commands. 
-> Simply run `just` in your terminal to see the available commands and execute them as needed.
+> Simply run `just` in your terminal to see the available commands.
+>
+> All targets accept an optional `mode` argument to switch between compile and watch mode:
+> ```bash
+> just cv            # compile once (default)
+> just cv watch      # watch mode — recompile on every save
+> just publications  # compile the publications list
+> ```
 
 > [!Note]
 > Typst cannot track page numbers automatically. If your content shifts pages, update the `toc` entries in `config.yml` with the correct page numbers.
@@ -100,19 +106,21 @@ typst watch --root . layouts/application-documents.typ full-application.pdf
 ```
 ├── README.md                      # This file
 ├── typst.toml                     # Package metadata
-├── config.yml                     # Settings & personal data (YAML)
-├── cv-data.en.yml                 # English CV content (YAML)
-├── cv-data.de.yml                 # German CV content (YAML)
-├── photo.png                       # Your photo (optional)
-├── signature.png                   # Your signature (optional)
+├── config.yml                     # Settings, TOC & certificates (YAML)
+├── cv-data.en.yml                 # English CV content + personal data (YAML)
+├── cv-data.de.yml                 # German CV content + personal data (YAML)
+├── citations.bib                  # BibTeX file for publications (optional)
+├── photo.png                      # Your photo (optional)
+├── signature.png                  # Your signature (optional)
 ├── src/
-│   ├── application_docs.typ        # Main template functions
-│   ├── rendering.typ               # CV section renderers
-│   └── translate.yml               # Multi-language strings
+│   ├── application_docs.typ       # Main template functions
+│   ├── rendering.typ              # CV section renderers
+│   └── translate.yml              # Multi-language strings
 └── layouts/
-    ├── application-documents.typ   # Full package entry point
-    ├── cover-letter.typ            # Letter-only entry point
-    └── cv.typ                      # CV-only entry point
+    ├── application-documents.typ  # Full package entry point
+    ├── cover-letter.typ           # Letter-only entry point
+    ├── cv.typ                     # CV-only entry point
+    └── publications.typ           # Publications list entry point
 ```
 
 ## Customization
@@ -135,7 +143,7 @@ Changing the `lang` setting automatically loads the corresponding `cv-data.{lang
 
 ### Personal Information
 
-Edit the `personal:` block in `config.yml`:
+Edit the `personal:` block in your `cv-data.{lang}.yml` file:
 
 ```yaml
 personal:
@@ -223,6 +231,39 @@ cv:
 
 For more examples of how to structure the CV sections, see `cv-data.en.yml` or `cv-data.de.yml`.
 
+### Publications
+
+To include a publications list, add a `citations.bib` file to your project root and compile `layouts/publications.typ`:
+
+```bash
+typst compile --root . layouts/publications.typ publications.pdf
+# or
+just publications
+```
+
+Publications are automatically grouped into sections by BibTeX entry type:
+
+| Section | Entry types |
+|---|---|
+| Journal Articles | `article` |
+| Conference Contributions | `inproceedings`, `proceedings`, `conference` |
+| Technical Reports & Other | `techreport`, `report` |
+| Theses | `phdthesis`, `mastersthesis`, `thesis` |
+
+Sections with no matching entries are omitted automatically. The author whose family name matches `personal.last-name` in your CV data is highlighted in bold.
+
+### Skipping CV Sections
+
+Prefix any key in `cv-data.{lang}.yml` with `_` to hide that section without deleting it:
+
+```yaml
+cv:
+  _volunteering:   # hidden — will not appear in the rendered CV
+    - label: "..."
+  education:
+    - ...
+```
+
 ### Adding More Languages
 
 To support additional languages:
@@ -233,28 +274,14 @@ To support additional languages:
 
 When you compile with the updated language setting, the template will automatically load the corresponding CV data file.
 
-### Cover Letter spacing
-
-Control vertical spacing in cover letters via blank lines or Typst spacing commands:
-
-```typst
-body: [
-  Dear Sir or Madam,
-
-  Body paragraph here.
-
-  #v(2em)  # Add explicit spacing before closing
-
-  Best regards,
-],
-```
 
 
 ## Tips
 
-- Keep `config.yml`, `photo.png`, `signature.png`, and your `cv-data.{lang}.yml` files private (add to `.gitignore`)
-- Alternatively, use this repository as a submodule in a private repository and copy the `layouts` directory. Remember to update the import paths in the layout files if you change the directory structure.
-- Use separate branches for different job applications
+- The best way to keep your personal CV data private: use this repository as a submodule in a private repository. Create all your personal YAML, BibTeX and PNG files in the root of the private repository and compile from there. Note that you need to point to the layouts in the submodule.
+- Alternatively, keep `config.yml`, `photo.png`, `signature.png`, and your `cv-data.{lang}.yml` files private (add to `.gitignore`)
+- Use your main branch or a dedicated full-cv branch to populate your CV over time
+- For different job applications, use separate branches 
 
   <details>
   <summary>Example: Branching workflow</summary>
@@ -263,24 +290,26 @@ body: [
 
   ```bash
   git checkout -b application/company-name
-  # Edit config.yml and layouts/cover-letter.typ
+  # Edit your cv-data.{lang}.yml file
   typst compile --root . layouts/application-documents.typ "Application_CompanyName.pdf"
   git add -A && git commit -m "Application: Company Name"
   git tag application/company-name
   ```
 
-  This keeps the main branch clean while maintaining a history of all applications.
+  This keeps the main branch clean while maintaining a history of all applications. (In the git log you will also have the creation dates of your applications.)
   </details>
 
 
 ## Requirements
 
-- **Typst** ≥ 0.14.2
+- [Typst](https://typst.app/) ≥ 0.14.2
 - `@preview/fontawesome:0.6.0` (automatically downloaded)
+- `@preview/pergamon:0.8.0` (automatically downloaded, used for publications)
+- `@preview/citegeist:0.2.2` (automatically downloaded, used for publications)
 
 ## License
 
-MIT — See [LICENSE](LICENSE) for details.
+MIT
 
 ## Credits
 
