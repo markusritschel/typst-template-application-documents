@@ -1,3 +1,29 @@
+# ── Personal Data ───────────────────────────────────────────────────────
+
+personal:
+  first-name: John
+  last-name:  Doe
+  address-street: 742 Evergreen Terrace
+  address-city:   Springfield, USA
+  phone:  "555-000"
+  email:  john.doe@example.com
+  website: https://johndoe.com
+  photo: /photo.png           # optional
+  signature: /signature.png   # optional, placed at end of CV and Cover Letter
+  titles: [Ph.D.]             # optional, shown below the name
+  profiles:
+    - network: GitHub
+      url: https://github.com/johndoe
+    - network: ORCID
+      url: https://orcid.org/0000-0000-0000-0000
+    - network: Twitter
+      url: https://x.com/johndoe
+    - network: Bluesky
+      url: https://bsky.app/jdoe
+    - network: LinkedIn
+      url: https://linkedin.com/in/johndoe
+
+
 # ── Lebenslauf ──────────────────────────────────────────────────────────────
 
 cv:
