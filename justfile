@@ -5,14 +5,13 @@ default:
     @just --list
 
 # Compile the full application document (Cover, Cover Letter, CV)
-application-documents:
-    typst compile --root=. layouts/application-documents.typ application-documents.pdf
+application-documents mode="compile":
+    typst {{mode}} --root=. layouts/application-documents.typ application-documents.pdf
 
 # Compile the Cover Letter only
-cover-letter:
-    typst compile --root=. layouts/cover-letter.typ cover-letter.pdf
+cover-letter mode="compile":
+    typst {{mode}} --root=. layouts/cover-letter.typ cover-letter.pdf
 
 # Compile the CV only
-cv:
-    typst compile --root=. layouts/cv.typ cv.pdf
-
+cv mode="compile":
+    typst {{mode}} --root=. layouts/cv.typ cv.pdf
