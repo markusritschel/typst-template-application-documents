@@ -1,7 +1,7 @@
 // Application Documents — full application package entry point.
 // Compile with:  typst compile --root . layouts/application-documents.typ
 
-#import "../src/application_docs.typ": render-cover, render-letter, render-cv, render-certificates, build-theme
+#import "../src/application_docs.typ": render-cover, render-letter, render-cv, render-certificates, render-publications, build-theme
 #import "cover-letter.typ": letter   // import letter data only (does not render here)
 
 #let config = yaml("/config.yml")
@@ -15,4 +15,5 @@
 #render-cover(data.personal, letter.position, toc, theme)
 #render-letter(data.personal, letter, theme)
 #render-cv(data, theme)
+#render-publications(theme)
 #render-certificates(certificates, theme)

@@ -15,3 +15,7 @@ cover-letter mode="compile":
 # Compile the CV only
 cv mode="compile":
     typst {{mode}} --root=. layouts/cv.typ cv.pdf
+
+# Compile the publication list only
+publications mode="compile":
+    typst {{mode}} --root=. layouts/publications.typ publications.pdf

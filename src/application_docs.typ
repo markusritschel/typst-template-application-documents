@@ -378,6 +378,25 @@
   }
 ]
 
+// ─── Publications (Veröffentlichungen) ───────────────────────────────────────
+
+#let render-publications(theme) = {
+  set text(font: theme.font, size: theme.size, fill: theme.text)
+  set par(justify: true)
+
+  bm-page-heading(tr("publications", theme.lang), theme)
+
+  show bibliography: set text(fill: theme.text, font: theme.font, size: theme.size)
+  show bibliography: set par(justify: true)
+
+  bibliography(
+    "/citations.bib",
+    full: true,
+    title: none,
+    style: "apa",
+  )
+}
+
 // ─── Theme builder ────────────────────────────────────────────────────────────
 
 // Build a theme dict by merging bm-defaults with optional YAML settings block.
