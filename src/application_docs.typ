@@ -148,7 +148,6 @@
 
   #letter.body
 
-  #text(weight: "bold")[#personal.at("first-name") #personal.at("last-name")]
   #v(1em)
   #if "signature" in personal {
     image(personal.signature, height: 1.5cm)
