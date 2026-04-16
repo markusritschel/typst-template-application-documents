@@ -94,7 +94,7 @@
   ]
 
   #v(5em)
-  #text(weight: "bold")[#tr("application-for", theme.lang) 
+  #text(weight: "semibold")[#tr("application-for", theme.lang) 
   #position]
 
   #v(1fr)
@@ -122,7 +122,7 @@
 
   // Sender block — right-aligned
   #align(right)[
-    #text(weight: "bold", fill: theme.accent)[#personal.at("first-name")] #text(weight: "bold")[#personal.at("last-name")] \
+    #text(weight: "semibold", fill: theme.accent)[#personal.at("first-name")] #text(weight: "semibold")[#personal.at("last-name")] \
     #personal.at("address-street") \
     #personal.at("address-city") \
     #bm-icon("phone") #h(2pt) #personal.phone \
@@ -145,7 +145,7 @@
   )
 
   #v(2.5em)
-  #text(weight: "bold")[#tr("application-for", theme.lang) #letter.position]
+  #text(weight: "semibold")[#tr("application-for", theme.lang) #letter.position]
   #v(2em)
 
   #letter.body
@@ -159,7 +159,7 @@
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 
 #let sidebar-heading(title, theme) = [
-  #text(weight: "bold", fill: theme.accent, size: 10pt)[#title]
+  #text(weight: "semibold", fill: theme.accent, size: 10pt)[#title]
   #v(-.5em)
   #line(length: 100%, stroke: .5pt + theme.accent)
   #v(-.35em)
@@ -169,7 +169,7 @@
   columns: (1fr, auto),
   gutter: .3em,
   text(size: 8.5pt)[#name],
-  text(size: 8.5pt, weight: "bold", fill: theme.accent)[#level],
+  text(size: 8.5pt, weight: "semibold", fill: theme.accent)[#level],
 )
 
 #let render-sidebar(sidebar, theme) = {
@@ -189,7 +189,7 @@
     sidebar-heading(tr("it-skills", theme.lang), theme)
     for group in sidebar.at("it-skills") {
       v(.25em)
-      [#text(weight: "bold", size: 9pt)[#group.category]]
+      [#text(weight: "semibold", size: 9pt)[#group.category]]
       for item in group.items {
         skill-row(item.name, item.level, theme)
         v(-.5em)
@@ -359,26 +359,23 @@
 
 // ─── Certificates placeholder (Zeugnisse & Zertifikate) ───────────────────────
 
-#let render-certificates(data, theme) = page(
-  paper: "a4",
-  margin: (x: 2.5cm, y: 2.5cm),
-)[
-  #set text(font: theme.font, size: theme.size)
-  #bm-page-heading(tr("certificates", theme.lang), theme)
+#let render-certificates(data, theme) = {
+  set text(font: theme.font, size: theme.size)
+  bm-page-heading(tr("certificates", theme.lang), theme)
 
-  #if data.len() != 0 {
+  if data.len() != 0 {
     set text(font: theme.font, weight: "regular", size: 1.4em, fill: theme.text)
     set list(spacing: 1.3em, indent: 2cm)
     v(2cm)
 
     show: checklist.with(marker-map: (
-      "x": text(baseline: -.4em, size: 1.5em)[#fa-file(solid: false)],
+      "file": text(baseline: -.4em, size: 1.5em)[#fa-file(solid: false)],
     ))
     for certificate in data [
-      - [x] #certificate \
+      - [file] #certificate \
     ]
   }
-]
+}
 
 // ─── Publications (Veröffentlichungen) ───────────────────────────────────────
 #let render-publications(data, theme) = [

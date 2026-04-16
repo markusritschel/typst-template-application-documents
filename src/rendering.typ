@@ -28,7 +28,7 @@
       text(size: 9pt)[#entry.date],
       [
         #block(sticky: true)[#{ // content expressions are concatenated without any automatic whitespace
-          text(weight: "bold")[#entry.title]
+          text(weight: "semibold")[#entry.title]
           if institution.len() > 0 [, #text(style: "italic")[#institution]]
           if location.len() > 0 [, #location]
           if description.len() > 0 [
