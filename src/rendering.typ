@@ -1,6 +1,11 @@
 
 // Two-column timeline row: narrow right-aligned date | wide content
 #let cv-row(date, body, theme) = {
+  // Set text in between parantheses in regular font weight
+  show regex("\(([^)]+)\)"): it => {
+    // it.text gives the raw matched string
+    text(weight: "regular", "(" + it.text.slice(1, -1) + ")")
+  }
   grid(
     columns: (2.65cm, 1fr),
     gutter: 1em,
