@@ -78,7 +78,7 @@
     renderer: timeline-view,
   ),
   "continuing-education": (
-    keys: ("date", "title", "description"),
+    keys: ("date", "title", "institution", "location", "description"),
     renderer: timeline-view,
   ),
   "volunteering": (
