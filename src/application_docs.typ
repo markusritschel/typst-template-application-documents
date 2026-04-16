@@ -402,8 +402,8 @@
   }
 
   // Pre-parse bib to skip empty sections
-  #let _parsed-bib = parse-bib(read("/citations.bib"))
-  #add-bib-resource(read("/citations.bib"))
+  #let _parsed-bib = parse-bib(read("/publications.bib"))
+  #add-bib-resource(read("/publications.bib"))
 
   #for (section, types) in bib-sections {
     // Skip if no entries of the given type(s) are present in the bibliography

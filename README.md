@@ -83,7 +83,7 @@ typst compile --root . layouts/cv.typ cv.pdf
 # Just the cover letter
 typst compile --root . layouts/cover-letter.typ cover-letter.pdf
 
-# Publications list (requires citations.bib in project root)
+# Publications list (requires publications.bib in project root)
 typst compile --root . layouts/publications.typ publications.pdf
 ```
 
@@ -109,7 +109,7 @@ typst compile --root . layouts/publications.typ publications.pdf
 ├── config.yml                     # Settings, TOC & certificates (YAML)
 ├── cv-data.en.yml                 # English CV content + personal data (YAML)
 ├── cv-data.de.yml                 # German CV content + personal data (YAML)
-├── citations.bib                  # BibTeX file for publications (optional)
+├── publications.bib                  # BibTeX file for publications (optional)
 ├── photo.png                      # Your photo (optional)
 ├── signature.png                  # Your signature (optional)
 ├── src/
@@ -233,7 +233,7 @@ For more examples of how to structure the CV sections, see `cv-data.en.yml` or `
 
 ### Publications
 
-To include a publications list, add a `citations.bib` file to your project root and compile `layouts/publications.typ`:
+To include a publications list, add a `publications.bib` file to your project root and compile `layouts/publications.typ`:
 
 ```bash
 typst compile --root . layouts/publications.typ publications.pdf

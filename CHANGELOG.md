@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **Publication list** (`layouts/publications.typ`): New standalone layout that renders a publications page from a `citations.bib` file. Compile with `typst compile --root . layouts/publications.typ publications.pdf` or via `just publications`.
+- **Publication list** (`layouts/publications.typ`): New standalone layout that renders a publications page from a `publications.bib` file. Compile with `typst compile --root . layouts/publications.typ publications.pdf` or via `just publications`.
 - **Publication categories**: Publications are automatically grouped into labelled sections (Journal Articles, Conference Contributions, Technical Reports, Theses) based on BibTeX entry types. Sections with no matching entries are skipped. The author matching the CV owner's last name is highlighted in bold.
 - **Section skipping via underscore prefix**: Any CV section whose key starts with `_` is silently skipped during rendering — useful for drafting or temporarily hiding sections without deleting them.
 - **Justfile `mode` parameter**: All `just` targets now accept an optional `mode` argument (`compile` or `watch`). For example, `just cv watch` switches a target into watch mode without needing a separate recipe.
