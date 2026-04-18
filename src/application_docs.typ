@@ -199,6 +199,18 @@
     v(1.2em)
   }
 
+  if "licenses" in sidebar {
+    sidebar-heading(tr("licenses", theme.lang), theme)
+    v(.1em)
+    for m in sidebar.licenses {
+      [
+        #text(size: 9pt)[#m] #v(-4pt)
+      ]
+    }
+    v(1.2em)
+  }
+
+
   if "methods" in sidebar {
     sidebar-heading(tr("methods", theme.lang), theme)
     v(.1em)
