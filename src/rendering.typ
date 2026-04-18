@@ -13,7 +13,7 @@
     text(size: 9pt, fill: theme.meta)[#date],
     body,
   )
-  v(.3em)
+  v(.1em)
 }
 
 // Define views for CV sections
