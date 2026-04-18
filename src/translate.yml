@@ -26,6 +26,10 @@ methods:
   de: "Methodenkompetenzen"
   en: "Methodical Skills"
 
+licenses:
+  de: "Lizensen"
+  en: "Licenses"
+
 professional-summary:
   de: "Berufliches Profil"
   en: "Professional Summary"
