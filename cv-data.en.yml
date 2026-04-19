@@ -36,14 +36,14 @@ cv:
   # ── Core competencies (groups of bullet points) ───────────────────────────
   core-competencies:
     - title: Donut Mastery
-      items:
-        - "Donut Identification: Expert classification of glazed, frosted, sprinkled, and filled varieties."
-        - "Quality Assurance: Rigorous testing methodology through direct consumption and taste evaluation."
+      details: |
+        Donut Identification: Expert classification of glazed, frosted, sprinkled, and filled varieties.
+        Quality Assurance: Rigorous testing methodology through direct consumption and taste evaluation.
     - title: Leisure & Recreation
-      items:
-        - "Napping: World-class ability to rest uninterrupted during work hours."
-        - "Television Expertise: Unparalleled knowledge of Itchy & Scratchy animation."
-        - "Beverage Connoisseurship: Master-level appreciation of Duff Beer."
+      details: |
+        - Napping: World-class ability to rest uninterrupted during work hours.
+        - Television Expertise: Unparalleled knowledge of Itchy & Scratchy animation.
+        - Beverage Connoisseurship: Master-level appreciation of Duff Beer.
 
   # ── Sidebar ───────────────────────────────────────────────────────────────
   sidebar:

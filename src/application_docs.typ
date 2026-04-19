@@ -330,9 +330,7 @@
                 #text(size: 10pt, fill: theme.accent)[#smallcaps(group.title)]
               ]
               #v(.15em)
-              #for item in group.items [
-                - #eval(item, mode: "markup") \
-              ]
+              #eval(group.details, mode: "markup")
               #v(.3em)
             ]
             let _ = cv.remove("core-competencies")
