@@ -347,15 +347,13 @@
     }
 
     // ── Full-width zone: flows naturally across pages ──
+    #for (section-id, section) in cv [
+      #if section-id.starts-with("_") { break }
 
-    #for (section-name, content) in cv [
-      #if section-name.starts-with("_") {
-        break
-      }
-      #let (keys, renderer) = cv-section-registry.at(section-name)
+      #let renderer = cv-section-registry.at(section.display)
 
-      #bm-section-header(tr(section-name, theme.lang), theme)
-      #renderer(section-name, content, keys, theme)
+      #bm-section-header(section.title, theme)
+      #renderer(section.entries, theme)
       #v(1.2em)
     ]
 

@@ -18,22 +18,27 @@
 
 // Define views for CV sections
 
-#let timeline-view(section-name, items, keys, theme) = {
-  // Allow different identifiers for institution
-  let institution-key = if "institution" in keys { "institution" } 
-                   else if "employer" in keys { "employer" } 
-                   else { "" }
+#let get-matching-value(dict, allowed-keys) = {
+  let found = allowed-keys.find(k => k in dict)
+  if found != none { dict.at(found) } else { "" }
+}
 
-  for entry in items [
-    #let institution = entry.at(institution-key, default: "")
+#let timeline-view(entries, theme) = {
+  // Allow different identifiers for institution
+  let allowed-institution-key = ("institution", "institute", "employer") 
+  
+  for entry in entries [
+    #let date = entry.date
+    #let title = entry.title
+    #let institution = get-matching-value(entry, allowed-institution-key)
     #let location = entry.at("location", default: "")
     #let description = entry.at("description", default: "")
 
     #cv-row(
-      text(size: 9pt)[#entry.date],
+      text(size: 9pt)[#date],
       [
         #block(sticky: true)[#{ // content expressions are concatenated without any automatic whitespace
-          text(weight: "semibold")[#entry.title]
+          text(weight: "semibold")[#title]
           if institution.len() > 0 [, #text(style: "italic")[#institution]]
           if location.len() > 0 [, #location]
           if description.len() > 0 [
@@ -47,19 +52,19 @@
   ]
 }
 
-#let label-view(section-name, items, keys, theme) = {
-  // Allow different identifiers for details
-  let description-key = if "description" in keys { "description" } 
-                   else if "text" in keys { "text" } 
-                   else if "title" in keys { "title" } 
-                   else { "" }
+#let label-view(entries, theme) = {
+  let allowed-infotext-keys = ("description", "text", "title") 
   
-  for entry in items [
+  for entry in entries [
+    #let label = entry.label
+    #let info-text = get-matching-value(entry, allowed-infotext-keys)
+    #let url = if "url" in entry { ": "+ link(entry.url)[#entry.at("url")] } else { "" }
+
     #cv-row(
-      text(size: 9pt)[#align(left)[#entry.label]],
+      text(size: 9pt)[#align(left)[#label]],
       [
         #set text(size: 9pt, style: "normal")
-        #eval(entry.at(description-key), mode: "markup")#if "url" in entry { " (" + link(entry.url)[#entry.url] + ")" }
+        #eval(info-text, mode: "markup")#url
       ],
       theme
     )
@@ -69,24 +74,6 @@
 // ——— Section Registry — each section is optional and only renders if corresponding data is present in the YAML file. 
 
 #let cv-section-registry = (
-  "education": (
-    keys: ("date", "title", "institution", "location", "description"),
-    renderer: timeline-view,
-  ),
-  "work-experience": (
-    keys: ("date", "title", "employer", "location", "description"),
-    renderer: timeline-view,
-  ),
-  "continuing-education": (
-    keys: ("date", "title", "institution", "location", "description"),
-    renderer: timeline-view,
-  ),
-  "volunteering": (
-    keys: ("label", "text", "url"),
-    renderer: label-view
-  ),
-  "publications": (
-    keys: ("label", "title", "url"),
-    renderer: label-view
-  ),
+  "timeline": timeline-view,
+  "labels": label-view
 )

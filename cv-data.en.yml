@@ -80,50 +80,65 @@ cv:
 
   # ── Education (timeline) ─────────────────────────────────────────────────
   education:
-    - date: "10/2018 – 06/2023"
-      title: "Master of Science Field of Study"
-      institution: "Springfield University"
-      location: "Springfield"
-      description: "Specialization: Subfield. Master's thesis: Title of final thesis."
-    - date: "10/2014 – 09/2018"
-      title: "Bachelor of Science Field of Study"
-      institution: "Springfield University"
-      location: "Springfield"
-    - date: "08/2005 – 06/2014"
-      title: "General University Entrance Qualification"
-      institution: "Springfield Elementary School"
+    title: "Education"
+    display: timeline
+    entries:
+      - date: "10/2018 – 06/2023"
+        title: "Master of Science Field of Study"
+        institution: "Springfield University"
+        location: "Springfield"
+        description: "Specialization: Subfield. Master's thesis: Title of final thesis."
+      - date: "10/2014 – 09/2018"
+        title: "Bachelor of Science Field of Study"
+        institution: "Springfield University"
+        location: "Springfield"
+      - date: "08/2005 – 06/2014"
+        title: "General University Entrance Qualification"
+        institution: "Springfield Elementary School"
 
   # ── Work experience (timeline) ────────────────────────────────────────────
   work-experience:
-    - date: "01/2023 – present"
-      title: "Safety Inspector"
-      employer: "Springfield Nuclear Power Plant"
-      location: "Springfield"
-      description: "Oversee Sector 7-G operations. Notable achievements: perfected the three-point employee safety checklist."
-    - date: "06/2020 – 12/2022"
-      title: "Donuts Quality Assurance"
-      employer: "Lard Lad Donuts"
-      location: "Springfield"
-      description: "Tested and validated donut quality through rigorous consumption methods."
+    title: "Work Experience"
+    display: timeline
+    entries:
+      - date: "01/2023 – present"
+        title: "Safety Inspector"
+        employer: "Springfield Nuclear Power Plant"
+        location: "Springfield"
+        description: "Oversee Sector 7-G operations. Notable achievements: perfected the three-point employee safety checklist."
+      - date: "06/2020 – 12/2022"
+        title: "Donuts Quality Assurance"
+        employer: "Lard Lad Donuts"
+        location: "Springfield"
+        description: "Tested and validated donut quality through rigorous consumption methods."
 
   # ── Volunteering / Volunteer Work ─────────────────────────────────────────
   volunteering:
-    - label: Volunteer Work
-      text: "Safety Officer at Springfield Nuclear Power Plant. Member of the Stonecutters Lodge (Secret Number: 908)."
-    - label: Hobbies
-      text: "Watching Itchy & Scratchy, Drinking Duff Beer, Eating Donuts, Napping at work."
+    title: "Volunteering"
+    display: labels
+    entries:
+      - label: Volunteer Work
+        text: "Safety Officer at Springfield Nuclear Power Plant. Member of the Stonecutters Lodge (Secret Number: 908)."
+      - label: Hobbies
+        text: "Watching Itchy & Scratchy, Drinking Duff Beer, Eating Donuts, Napping at work."
 
   # ── Continuing education ──────────────────────────────────────────────────
   continuing-education:
-    - date: 2024
-      title: "Advanced Donut Appreciation"
-      description: "Certified expert in identifying and consuming glazed, frosted, and sprinkled varieties."
-    - date: 2022
-      title: "Nuclear Safety Basics"
-      description: "Certification obtained on first attempt. Somehow. Don't ask questions."
+    title: "Continuing Education"
+    display: timeline
+    entries:
+      - date: 2024
+        title: "Advanced Donut Appreciation"
+        description: "Certified expert in identifying and consuming glazed, frosted, and sprinkled varieties."
+      - date: 2022
+        title: "Nuclear Safety Basics"
+        description: "Certification obtained on first attempt. Somehow. Don't ask questions."
 
   # ── Publications ──────────────────────────────────────────────────────────
   publications:
-    - label: "Doe et al. (2026)"
-      title: "Why Donuts Are Better Than Work: A Memoir"
-      url: "https://simpsonsfamily.net/memoirs"
+    title: "Publications"
+    display: labels
+    entries:
+      - label: "Doe et al. (2026)"
+        title: "Why Donuts Are Better Than Work: A Memoir"
+        url: "https://simpsonsfamily.net/memoirs"
