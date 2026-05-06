@@ -64,6 +64,7 @@
       text(size: 9pt)[#align(left)[#label]],
       [
         #set text(size: 9pt, style: "normal")
+        #show list: set block(above: 0pt, below: 0pt)   // to avoid extra vertical spacing if using lists in the info text
         #eval(info-text, mode: "markup")#url
       ],
       theme
