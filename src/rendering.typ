@@ -58,7 +58,11 @@
   for entry in entries [
     #let label = entry.label
     #let info-text = get-matching-value(entry, allowed-infotext-keys)
-    #let url = if "url" in entry { ": "+ link(entry.url)[#entry.at("url")] } else { "" }
+    #let url = if "url" in entry {
+        ". URL:" + sym.space.nobreak + link(entry.url)[#entry.at("url")]
+      } else if "doi" in entry {
+        ". DOI:" + sym.space.nobreak + link("https://dx.doi.org/" + entry.doi)[#entry.at("doi")]
+      } else { "" }
 
     #cv-row(
       text(size: 9pt)[#align(left)[#label]],
