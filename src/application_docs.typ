@@ -307,43 +307,45 @@
 
     #render-cv-header(data.personal, theme)
 
+    #let intro-block = [
+      #if "motivation" in cv {
+        bm-section-header(tr("professional-summary", theme.lang), theme)
+        [
+          #set text(size: 9pt, style: "normal")
+          #set par(justify: true)
+          #eval(cv.motivation, mode: "markup")
+        ]
+        let _ = cv.remove("motivation")
+        v(1.2em)
+      }
+      #if "core-competencies" in cv {
+        bm-section-header(tr("core-competencies", theme.lang), theme)
+        for group in cv.at("core-competencies") [
+          #align(center)[
+            #text(size: 10pt, fill: theme.accent)[#smallcaps(group.title)]
+          ]
+          #v(.15em)
+          #eval(group.details, mode: "markup")
+          #v(.3em)
+        ]
+        let _ = cv.remove("core-competencies")
+        v(1.2em)
+      }
+    ]
+
     // ── Two-column zone: (Summary + Kernkompetenzen) | sidebar ──
-    #if "motivation" in cv or "core-competencies" in cv or "sidebar" in cv {
+    #if "sidebar" in cv {
       grid(
         columns: (1fr, 5.5cm),
         gutter: 2.5em,
-        [
-          #if "motivation" in cv {
-            bm-section-header(tr("professional-summary", theme.lang), theme)
-            [
-              #set text(size: 9pt, style: "normal")
-              #set par(justify: true)
-              #eval(cv.motivation, mode: "markup")
-            ]
-            let _ = cv.remove("motivation")
-            v(1.2em)
-          }
-          #if "core-competencies" in cv {
-            bm-section-header(tr("core-competencies", theme.lang), theme)
-            for group in cv.at("core-competencies") [
-              #align(center)[
-                #text(size: 10pt, fill: theme.accent)[#smallcaps(group.title)]
-              ]
-              #v(.15em)
-              #eval(group.details, mode: "markup")
-              #v(.3em)
-            ]
-            let _ = cv.remove("core-competencies")
-            v(1.2em)
-          }
-        ],
-        [
-          #if "sidebar" in cv {
-            render-sidebar(cv.sidebar, theme)
-            let _ = cv.remove("sidebar")
-          }
-        ],
+        intro-block,       
+        render-sidebar(cv.sidebar, theme)
       )
+      let _ = cv.remove("sidebar")
+    } 
+    // —— If no sidebar indicated, use on-column layout
+    else {
+      intro-block
     }
 
     // ── Full-width zone: flows naturally across pages ──
