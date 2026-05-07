@@ -22,6 +22,7 @@
   font:   "Libertinus Serif",
   size:   10pt,
   lang:   "de",
+  paper:  "a4",
 )
 
 // ─── Shared utilities ─────────────────────────────────────────────────────────
@@ -301,7 +302,7 @@
 
 #let render-cv(data, theme) = {
   let cv = data.cv
-  page(paper: "a4", margin: (x: 2.5cm, y: 2.5cm))[
+  page(paper: theme.paper)[
     #set text(font: theme.font, size: theme.size, fill: theme.text)
     #set par(justify: true)
 
@@ -368,90 +369,93 @@
 }
 
 // ─── Certificates placeholder (Zeugnisse & Zertifikate) ───────────────────────
-
 #let render-certificates(data, theme) = {
-  set text(font: theme.font, size: theme.size)
-  bm-page-heading(tr("certificates", theme.lang), theme)
+  page(paper: theme.paper)[
+    #set text(font: theme.font, size: theme.size)
 
-  if data.len() != 0 {
-    set text(font: theme.font, weight: "regular", size: 1.4em, fill: theme.text)
-    set list(spacing: 1.3em, indent: 2cm)
-    v(2cm)
+    #bm-page-heading(tr("certificates", theme.lang), theme)
 
-    show: checklist.with(marker-map: (
-      "file": text(baseline: -.4em, size: 1.5em)[#fa-file(solid: false)],
-    ))
-    for certificate in data [
-      - [file] #certificate \
-    ]
-  }
+    #if data.len() != 0 {
+      set text(font: theme.font, weight: "regular", size: 1.4em, fill: theme.text)
+      set list(spacing: 1.3em, indent: 2cm)
+      v(2cm)
+
+      show: checklist.with(marker-map: (
+        "file": text(baseline: -.4em, size: 1.5em)[#fa-file(solid: false, fill: theme.meta)],
+      ))
+      for certificate in data [
+        - [file] #certificate \
+      ]
+    }
+  ]
 }
 
 // ─── Publications (Veröffentlichungen) ───────────────────────────────────────
-#let render-publications(data, theme) = [
-  #set text(font: theme.font, size: theme.size, fill: theme.text)
-  #set par(justify: true)
+#let render-publications(data, theme) = {
+  page(paper: theme.paper)[
+    #set text(font: theme.font, size: theme.size, fill: theme.text)
+    #set par(justify: true)
 
-  #bm-page-heading(tr("publications", theme.lang), theme)
+    #bm-page-heading(tr("publications", theme.lang), theme)
 
-  #let bib-sections = (
-    ("pub-articles",   ("article")),
-    // ("pub-proceeding", ("inproceedings", "proceedings")),
-    ("pub-proceeding", ("conference")),
-    ("pub-reports",    ("techreport", "report")),
-    ("pub-conference", ("conference", "inproceedings", "proceedings")),
-    ("pub-theses",     ("phdthesis", "mastersthesis", "thesis")),
-  )
+    #let bib-sections = (
+      ("pub-articles",   ("article")),
+      // ("pub-proceeding", ("inproceedings", "proceedings")),
+      ("pub-proceeding", ("conference")),
+      ("pub-reports",    ("techreport", "report")),
+      ("pub-conference", ("conference", "inproceedings", "proceedings")),
+      ("pub-theses",     ("phdthesis", "mastersthesis", "thesis")),
+    )
 
-  #show link: it => {
-    set text(fill: theme.accent)
-    it
-  }
+    #show link: it => {
+      set text(fill: theme.accent)
+      it
+    }
 
-  // Pre-parse bib to skip empty sections
-  #let _parsed-bib = parse-bib(read("/publications.bib"))
-  #add-bib-resource(read("/publications.bib"))
+    // Pre-parse bib to skip empty sections
+    #let _parsed-bib = parse-bib(read("/publications.bib"))
+    #add-bib-resource(read("/publications.bib"))
 
-  #for (section, types) in bib-sections {
-    // Skip if no entries of the given type(s) are present in the bibliography
-    let has-entries = _parsed-bib.values().any(r => r.entry_type in types)
-    if not has-entries { continue }
-    
-    let style = format-citation-numeric()
-    refsection(style: numeric-style())[
-      #print-bibliography(
-        title: bm-section-header(tr(section, theme.lang), theme), 
-        filter: r => r.entry_type in types,
-        show-all: true, 
-        resume-after: auto,
-        sorting: "ydnt", 
-        outlined: false,
-        format-reference: format-reference(
-          print-identifiers: ("doi", "url"),
-          link-titles: false,
-          reference-label: style.reference-label,
-          format-quotes: it => ["#it"],
-          print-date-after-authors: true,
-          comma: ",",
-          maxnames: 3,
-          format-fields: (
-            "author": (ddfmt, value, reference, field, options, style) => {
-              let formatted-names = value.map(d => {
-                let highlighted = (d.family == data.personal.last-name)
-                let name = format-name(d, format: "{family}")
-                if highlighted { strong(name) } else { name }
-              })
-              concatenate-names(formatted-names, maxnames: 3)
-            }
-          )
-        ),
-        // label-generator: style.label-generator
-      )
-    ]
-  v(1em)
-  }
-]
-
+    #for (section, types) in bib-sections {
+      // Skip if no entries of the given type(s) are present in the bibliography
+      let has-entries = _parsed-bib.values().any(r => r.entry_type in types)
+      if not has-entries { continue }
+      
+      let style = format-citation-numeric()
+      refsection(style: numeric-style())[
+        #print-bibliography(
+          title: bm-section-header(tr(section, theme.lang), theme), 
+          filter: r => r.entry_type in types,
+          show-all: true, 
+          resume-after: auto,
+          sorting: "ydnt", 
+          outlined: false,
+          format-reference: format-reference(
+            print-identifiers: ("doi", "url"),
+            link-titles: false,
+            reference-label: style.reference-label,
+            format-quotes: it => ["#it"],
+            print-date-after-authors: true,
+            comma: ",",
+            maxnames: 3,
+            format-fields: (
+              "author": (ddfmt, value, reference, field, options, style) => {
+                let formatted-names = value.map(d => {
+                  let highlighted = (d.family == data.personal.last-name)
+                  let name = format-name(d, format: "{family}")
+                  if highlighted { strong(name) } else { name }
+                })
+                concatenate-names(formatted-names, maxnames: 3)
+              }
+            )
+          ),
+          // label-generator: style.label-generator
+        )
+      ]
+    v(1em)
+    }
+  ]
+}
 
 // ─── Theme builder ────────────────────────────────────────────────────────────
 
