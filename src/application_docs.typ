@@ -348,7 +348,7 @@
 
     // ── Full-width zone: flows naturally across pages ──
     #for (section-id, section) in cv [
-      #if section-id.starts-with("_") { break }
+      #if section-id.starts-with("_") { continue }
 
       #let renderer = cv-section-registry.at(section.display)
 
