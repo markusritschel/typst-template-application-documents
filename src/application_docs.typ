@@ -343,9 +343,8 @@
         render-sidebar(cv.sidebar, theme)
       )
       let _ = cv.remove("sidebar")
-    } 
+    } else {
     // —— If no sidebar indicated, use on-column layout
-    else {
       intro-block
     }
 
