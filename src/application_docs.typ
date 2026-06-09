@@ -177,49 +177,30 @@
   set text(font: theme.font, size: 9pt, fill: theme.text)
   set par(leading: 0.4em)
 
-  if "languages" in sidebar {
-    sidebar-heading(tr("languages", theme.lang), theme)
-    for lang in sidebar.languages {
-      skill-row(lang.name, lang.level, theme)
+  let render-items(items) = {
+    for item in items {
+      if type(item) == dictionary { 
+        skill-row(item.name, item.level, theme) 
+      } else { [#text(size: 9pt)[#item]] }
       v(-.5em)
     }
-    v(1.2em)
   }
 
-  if "it-skills" in sidebar {
-    sidebar-heading(tr("it-skills", theme.lang), theme)
-    for group in sidebar.at("it-skills") {
-      v(.25em)
-      [#text(weight: "semibold", size: 9pt)[#group.category]]
-      for item in group.items {
-        skill-row(item.name, item.level, theme)
-        v(-.5em)
+  for (section-id, section-content) in sidebar.pairs() {
+    sidebar-heading(tr(section-id, theme.lang), theme)
+    
+    let first-element = section-content.first()
+    if type(first-element) == dictionary and "category" in first-element {
+      for group in section-content {
+        v(.25em)
+        [#text(weight: "semibold", size: 9pt)[#group.category]]
+        render-items(group.items)
+        v(.5em)
       }
-      v(.5em)
+    } else {
+      render-items(section-content)
     }
     v(1.2em)
-  }
-
-  if "licenses" in sidebar {
-    sidebar-heading(tr("licenses", theme.lang), theme)
-    v(.1em)
-    for m in sidebar.licenses {
-      [
-        #text(size: 9pt)[#m] #v(-4pt)
-      ]
-    }
-    v(1.2em)
-  }
-
-
-  if "methods" in sidebar {
-    sidebar-heading(tr("methods", theme.lang), theme)
-    v(.1em)
-    for m in sidebar.methods {
-      [
-        #text(size: 9pt)[#m] #v(-4pt)
-      ]
-    }
   }
 }
 
