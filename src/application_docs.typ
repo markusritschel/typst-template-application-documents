@@ -151,9 +151,9 @@
 
   #letter.body
 
-  #v(1em)
+  #v(.6em)
   #if "signature" in personal {
-    image(personal.signature, height: 1.5cm)
+    image(personal.signature, height: 1.1cm)
   }
 ]
 
