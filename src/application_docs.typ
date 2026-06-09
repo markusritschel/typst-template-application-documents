@@ -82,8 +82,8 @@
 
   // Name: first name in accent colour, last name in body colour
   #text(size: 38pt, fill: theme.accent, weight: "regular")[#personal.at("first-name")]#text(
-    size: 38pt, weight: "regular",
-  )[ #personal.at("last-name")]
+    size: 38pt, fill: theme.accent, weight: "regular",
+  )[ #personal.at("last-name") ]
 
   #v(.3em)
   #text(size: 9pt)[
@@ -123,7 +123,7 @@
 
   // Sender block — right-aligned
   #align(right)[
-    #text(weight: "semibold", fill: theme.accent)[#personal.at("first-name")] #text(weight: "semibold")[#personal.at("last-name")] \
+    #text(weight: "semibold", fill: theme.accent)[#personal.at("first-name")] #text(weight: "semibold", fill: theme.accent)[#personal.at("last-name")] \
     #personal.at("address-street") \
     #personal.at("address-city") \
     #bm-icon("phone") #h(2pt) #personal.phone \
@@ -261,7 +261,7 @@
 
   // Name
   text(size: 22pt, weight: "regular", fill: theme.accent)[#personal.at("first-name")]
-  text(size: 22pt, weight: "regular")[ #personal.at("last-name")]
+  text(size: 22pt, weight: "regular", fill: theme.accent)[ #personal.at("last-name")]
 
   // Optional titles / degrees
   if "titles" in personal and personal.titles.len() > 0 {
