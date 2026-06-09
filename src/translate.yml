@@ -14,6 +14,10 @@ cover-letter:
   de: "Bewerbungsanschreiben"
   en: "Cover Letter"
 
+motivation-letter:
+  de: "Motivationsschreiben"
+  en: "Letter of Motivation"
+
 languages:
   de: "Sprachkenntnisse"
   en: "Language Skills"

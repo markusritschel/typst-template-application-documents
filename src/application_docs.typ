@@ -112,14 +112,14 @@
 // ─── Cover letter (Anschreiben) ───────────────────────────────────────────────
 
 // letter dict keys: position (str), date (str), recipient (dict), body (content)
-#let render-letter(personal, letter, theme) = page(
+#let render-letter(personal, letter, theme, letter-type: "cover-letter") = page(
   paper: "a4",
   margin: (x: 2.5cm, top: 2cm, bottom: 2cm),
 )[
   #set text(font: theme.font, size: theme.size, fill: theme.text)
   #set par(justify: true)
 
-  #bm-page-heading(tr("cover-letter", theme.lang), theme)
+  #bm-page-heading(tr(letter-type, theme.lang), theme)
 
   // Sender block — right-aligned
   #align(right)[
@@ -145,15 +145,14 @@
     align(right)[#letter.date],
   )
 
-  #v(2.5em)
+  #v(2em)
   #text(weight: "semibold")[#tr("application-for", theme.lang) #letter.position]
   #v(2em)
 
   #letter.body
 
-  #v(.6em)
   #if "signature" in personal {
-    image(personal.signature, height: 1.1cm)
+    image(personal.signature, height: 1cm)
   }
 ]
 
