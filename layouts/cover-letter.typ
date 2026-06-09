@@ -9,8 +9,8 @@
 #let config = yaml("/config.yml")
 #let lang = config.settings.lang
 #let cvdata = yaml("/cv-data." + lang + ".yml")
-#let data     = config + cvdata
-#let theme   = build-theme(data)
+#let data = config + cvdata
+#let theme = build-theme(data)
 #let personal = data.personal
 
 
@@ -19,4 +19,4 @@
 
 #letter.insert("body", body)
 
-#render-letter(personal, letter, theme)
+#render-letter(personal, letter, theme, letter-type: "cover-letter")
