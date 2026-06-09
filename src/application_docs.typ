@@ -47,7 +47,7 @@
 // Large page-level heading with full-width underline rule
 #let bm-page-heading(title, theme, a: center) = align(a)[
   #text(size: 28pt, fill: theme.accent, weight: "regular")[#title]
-  #v(-5pt)
+  #v(-15pt)
   #line(length: 100%, stroke: 1pt + theme.accent)
   #v(1em)
 ]
