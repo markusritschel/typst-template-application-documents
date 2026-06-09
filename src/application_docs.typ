@@ -114,7 +114,7 @@
 // letter dict keys: position (str), date (str), recipient (dict), body (content)
 #let render-letter(personal, letter, theme) = page(
   paper: "a4",
-  margin: (x: 2.5cm, top: 2.5cm, bottom: 3cm),
+  margin: (x: 2.5cm, top: 2cm, bottom: 2cm),
 )[
   #set text(font: theme.font, size: theme.size, fill: theme.text)
   #set par(justify: true)
