@@ -126,8 +126,8 @@
     #text(weight: "semibold", fill: theme.accent)[#personal.at("first-name")] #text(weight: "semibold", fill: theme.accent)[#personal.at("last-name")] \
     #personal.at("address-street") \
     #personal.at("address-city") \
-    #bm-icon("phone") #h(2pt) #personal.phone \
-    #bm-icon("email") #h(2pt) #personal.email
+    #bm-icon("email") #h(2pt) #personal.email \
+    #bm-icon("phone") #h(2pt) #personal.phone
   ]
 
   #v(1em)
