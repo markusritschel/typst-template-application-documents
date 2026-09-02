@@ -247,7 +247,7 @@
   if "titles" in personal and personal.titles.len() > 0 {
     // linebreak()
     v(.1em)
-    text(size: theme.size)[#for t in personal.titles { t }]
+    text(size: theme.size)[#personal.titles.join("  ·  ")]
   }
 
   v(.3em)
