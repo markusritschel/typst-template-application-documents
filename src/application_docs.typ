@@ -236,7 +236,7 @@
   set align(center)
 
   // Page title
-  text(size: 14pt, fill: theme.text, weight: "regular")[#smallcaps("Curriculum Vitae")]
+  text(size: 14pt, fill: theme.text, weight: "regular")[#smallcaps(tr("curriculum-vitae", theme.lang))]
   v(1.15em)
 
   // Name

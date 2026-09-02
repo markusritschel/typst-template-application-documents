@@ -14,6 +14,10 @@ cover-letter:
   de: "Bewerbungsanschreiben"
   en: "Cover Letter"
 
+curriculum-vitae:
+  de: "Lebenslauf"
+  en: "Curriculum Vitae"
+
 motivation-letter:
   de: "Motivationsschreiben"
   en: "Letter of Motivation"
