@@ -1,5 +1,5 @@
 // Bewerbungsanschreiben — standalone letter entry point.
-// Edit the cover-letter.md file for each application, then compile with:
+// Edit the cover-letter.{lang}.md file for the target application, then compile with:
 //   typst compile --root . layouts/cover-letter.typ
 
 #import "@preview/cmarker:0.1.8"
@@ -15,7 +15,7 @@
 
 
 // #render-letter(personal, letter, theme)
-#let (letter, body) = cmarker.render-with-metadata(read("/cover-letter.md"), metadata-block: "frontmatter-yaml")
+#let (letter, body) = cmarker.render-with-metadata(read("/cover-letter." + lang + ".md"), metadata-block: "frontmatter-yaml")
 
 #letter.insert("body", body)
 
